@@ -8,11 +8,13 @@
    ============================================================ */
 
 const BUNDLES = [
-  { id: "b10",  price: 10,  label: "30 mins",  minutes: 30,   best: false },
-  { id: "b20",  price: 20,  label: "1 hour",   minutes: 60,   best: false },
-  { id: "b50",  price: 50,  label: "3 hours",  minutes: 180,  best: true  },
-  { id: "b100", price: 100, label: "6 hours",  minutes: 360,  best: false },
-  { id: "b150", price: 150, label: "24 hours", minutes: 1440, best: false },
+  { id: "b10",  price: 10,  label: "1 hour",   minutes: 60,   tag: "Quick check-in",    best: false },
+  { id: "b20",  price: 20,  label: "2 hours",  minutes: 120,  tag: "Study session",     best: false },
+  { id: "b35",  price: 35,  label: "4 hours",  minutes: 240,  tag: "Half-day grind",    best: false },
+  { id: "b50",  price: 50,  label: "6 hours",  minutes: 360,  tag: "All-round pick",    best: true  },
+  { id: "b75",  price: 75,  label: "10 hours", minutes: 600,  tag: "Work-from-home",    best: false },
+  { id: "b100", price: 100, label: "18 hours", minutes: 1080, tag: "Almost non-stop",   best: false },
+  { id: "b150", price: 150, label: "24 hours", minutes: 1440, tag: "Full day, no cap",  best: false },
 ];
 
 let selectedBundle = null;
@@ -28,6 +30,7 @@ BUNDLES.forEach((bundle, i) => {
   card.innerHTML = `
     <span class="price">${bundle.price}<sup>bob</sup></span>
     <span class="time">${bundle.label}</span>
+    <span class="tag">${bundle.tag}</span>
   `;
   card.addEventListener("click", () => selectBundle(bundle, card));
   bundlesEl.appendChild(card);
@@ -39,8 +42,9 @@ function selectBundle(bundle, cardEl){
   document.querySelectorAll(".bundle").forEach(el => el.classList.remove("selected"));
   cardEl.classList.add("selected");
 
-  // signal bars fill in proportion to which tier (1-5) was picked
-  const idx = BUNDLES.findIndex(b => b.id === bundle.id) + 1;
+  // signal bars (5 total) fill in proportion to position among 7 tiers
+  const rank = BUNDLES.findIndex(b => b.id === bundle.id) + 1;
+  const idx = Math.max(1, Math.round((rank / BUNDLES.length) * 5));
   const signal = document.getElementById("signal");
   signal.className = "signal active-" + idx;
 
@@ -156,5 +160,4 @@ function payWithMpesa({ phone, amount, bundleId }){
       resolve({ success: true }); // mock: always succeeds after 2.2s
     }, 2200);
   });
-    }
-
+}
