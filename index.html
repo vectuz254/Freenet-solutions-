@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+<title>Free Net Solutions — Connect</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="noise"></div>
+
+<main class="portal">
+
+  <!-- Signal mark: signature element. Bars fill as you move up bundles. -->
+  <header class="brand">
+    <div class="signal" id="signal" aria-hidden="true">
+      <span class="bar b1"></span>
+      <span class="bar b2"></span>
+      <span class="bar b3"></span>
+      <span class="bar b4"></span>
+      <span class="bar b5"></span>
+    </div>
+    <h1>Free Net<span>Solutions</span></h1>
+    <p class="tagline">Free to join. Pay only for the time you browse.</p>
+  </header>
+
+  <section class="bundles" id="bundles" aria-label="Choose a bundle">
+    <!-- populated by JS -->
+  </section>
+
+  <section class="form-card">
+    <label for="phone">Safaricom / M-Pesa number</label>
+    <div class="phone-row">
+      <span class="prefix">+254</span>
+      <input type="tel" id="phone" placeholder="7XX XXX XXX" inputmode="numeric" maxlength="9" autocomplete="tel">
+    </div>
+    <p class="hint" id="hint">Pick a bundle above, then enter the number to pay from.</p>
+
+    <button class="pay-btn" id="payBtn" disabled>
+      <span class="btn-label">Select a bundle</span>
+      <span class="btn-price" id="btnPrice"></span>
+    </button>
+
+    <p class="fine-print">
+      You'll get an M-Pesa prompt on your phone. Enter your PIN to confirm.
+      Your session starts the moment payment is received.
+    </p>
+  </section>
+
+  <section class="status" id="status" hidden>
+    <div class="spinner" id="spinner"></div>
+    <p id="statusText">Sending payment request to your phone…</p>
+  </section>
+
+  <footer class="foot">
+    <span>Free Net Solutions</span>
+    <span class="dot">•</span>
+    <span>Powered by VECTUZ</span>
+  </footer>
+
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
